@@ -32,27 +32,19 @@ ckan.module("cloudstorage-multipart-upload", function($, _) {
       // order to prevent type-coercion, so we have to strip it
       this.options.packageId = this.options.packageId.slice(1);
       this._form = this.$("form");
-      this._file = $("#field-image-upload");
-      this._url = $("#field-image-url");
+      this._file = $("#field-resource-upload");
+      this._url = $("#field-resource-url");
       this._save = $("[name=save]");
       this._id = $("input[name=id]");
       this._progress = $("<div>", {
         class: "progress"
       });
 
-      this._upload_message = $("<div>Please wait until upload finishes</div>");
-      this._upload_message.addClass("upload-message");
-      this._upload_message.css("margin-top", "10px");
-      this._upload_message.css("line-height", "0px");
-      this._upload_message.css("text-align", "center");
-      this._upload_message.css("text-align", "center");
-      this._progress.append(this._upload_message);
-
-      this._bar = $("<div>", {
+      this._bar = $("<div><div class=\"justify-content-center d-flex position-absolute w-100\">Please wait until upload finishes</div></div>", {
         class: "progress-bar progress-bar-striped progress-bar-animated active"
       });
       this._progress.append(this._bar);
-      this._progress.insertAfter(this._url.parent().parent());
+      this._progress.insertAfter(this._file.parent().parent());
       this._progress.hide();
 
       this._resumeBtn = $("<a>", { class: "btn btn-info controls" })
