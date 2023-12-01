@@ -91,7 +91,12 @@ class CloudStorage(object):
         A dictionary of options ckanext-cloudstorage has been configured to
         pass to the apache-libcloud driver.
         """
-        return literal_eval(config["ckanext.cloudstorage.driver_options"])
+        driver_options = {}
+        prefix = "ckanext.cloudstorage.driver_options."
+        for k, v in config.items():
+            if k.startswith(prefix):
+                driver_options[k[len(prefix):]] = v
+        return driver_options
 
     @property
     def driver_name(self):

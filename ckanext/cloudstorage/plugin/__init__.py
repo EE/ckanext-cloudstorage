@@ -43,7 +43,6 @@ class CloudStoragePlugin(MixinPlugin, plugins.SingletonPlugin):
 
         required_keys = (
             "ckanext.cloudstorage.driver",
-            "ckanext.cloudstorage.driver_options",
             "ckanext.cloudstorage.container_name",
         )
 
@@ -52,6 +51,9 @@ class CloudStoragePlugin(MixinPlugin, plugins.SingletonPlugin):
                 raise RuntimeError(
                     "Required configuration option {0} not found.".format(rk)
                 )
+
+        # try to get driver. better fail fast
+        storage.CloudStorage()
 
     # IUploader
 
